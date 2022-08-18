@@ -115,14 +115,20 @@ scene.add(mesh6);
 
 
 // Set up lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-scene.add(ambientLight);
-
+const color = 0xFFFFFF;
+const intensity = 1.5;
+const light = new THREE.DirectionalLight(color, intensity);
+//light.position.set(0, 10, 0);
+light.position.set(20, 10, 20);
+//light.target.position.set(-5, 0, 0);
+scene.add(light);
+scene.add(light.target);
+/*
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
 directionalLight.position.set(10, 20, 0); // x, y, z
 scene.add(directionalLight);
 
-
+*/
 
     const loader = new THREE.TextureLoader();
     const texture = loader.load(
