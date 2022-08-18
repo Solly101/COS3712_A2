@@ -9,16 +9,20 @@
         <canvas id="canvas"> </canvas>
         Speed
         <input id="sldrSpeed" type="range" min="0.0" max="1" step="0.1" value="0.1" />
-        Zoom
-        <input id="zoom" type="range" min="40.0" max="150" step="10" value="100" />
+        Zoom 
+        +<input id="zoom" type="range" min="40.0" max="150" step="10" value="100" />-
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js" integrity="sha512-U4J4PbEJ2TMjFqPUSiKq7LLTHuEkPZVo0jl2fomi9pT7UAExh4xVi8KmoR7EfmyigH95aA68zpW7y3XzuoSurQ==" crossorigin="anonymous"></script>
         
         <div>
             <Button onclick="rStart()" >Start</Button>
             <Button onclick="rStop()">Stop</Button>
             <Button onclick="rChange()">Change dir</Button>  
+            <Button onclick="toDirLight()">Day</Button> 
+            <Button onclick="toPointLight()">Night</Button> 
        </div>
 	  <script type="text/javascript" src="app.js" ></script>
+      
       
 	</body>
 </html>
