@@ -90,31 +90,39 @@ function init(day,night){
 
 
     //Roof
+    const textureRoof = new THREE.TextureLoader().load( 'roof1.jpg' );
+
     const geometry = new THREE.ConeGeometry( 3.2, 5, 30 );
-    const material = new THREE.MeshLambertMaterial();
+    const material = new THREE.MeshLambertMaterial({ map: textureRoof});
     material.color = new THREE.Color( 0xfb8e00 );
     const mesh = new THREE.Mesh(geometry, material);
     mesh.position.set(-2, 5,0 );
     scene.add(mesh);
 
     //Walls
+    const textureWall = new THREE.TextureLoader().load( 'wall1.jpg' );
+
     const geometryCylinder = new THREE.CylinderGeometry( 3, 3, 5, 32 );
-    const material2 = new THREE.MeshLambertMaterial({ color: 0xfAA4A44 });
+    const material2 = new THREE.MeshLambertMaterial({ map: textureWall});
     const mesh2 = new THREE.Mesh(geometryCylinder, material2);
     mesh2.position.set(-2, 0, 0);
     scene.add(mesh2);
 
     //pond
+    const textureWater = new THREE.TextureLoader().load( 'water1.jpg' );
+
     const Circle = new THREE.CylinderGeometry( 3, 3, 0.1, 32 );
-    const water = new THREE.MeshLambertMaterial({ color: 0xf006994 });
+    const water = new THREE.MeshLambertMaterial({ map:textureWater });
     const mesh3 = new THREE.Mesh(Circle, water);
     mesh3.position.set(7, 0, -3);
     scene.add(mesh3);
 
 
     //Igloo
+    const texturIg = new THREE.TextureLoader().load( 'ice1.jpg' );
+
     const hCircle = new THREE.SphereBufferGeometry(5, 40, 16, 0, 2*Math.PI, 0, 0.5* Math.PI);
-    const wall2 = new THREE.MeshLambertMaterial({ color:0xfEDF4F5 });
+    const wall2 = new THREE.MeshLambertMaterial({ map: texturIg });
     const mesh5 = new THREE.Mesh(hCircle, wall2);
     wall2.roughness = 0.5;
     material.side = THREE.DoubleSide;
@@ -123,6 +131,8 @@ function init(day,night){
 
     //const newLocal = 5;
     //Igloo Door
+    const texturIgDoor = new THREE.TextureLoader().load( 'ice1.jpg' );
+
     const Cylinder = new THREE.CylinderGeometry();
     Cylinder.radiusTop=12;
     Cylinder.radiusBottom= 12;
@@ -134,7 +144,7 @@ function init(day,night){
     Cylinder.thetaLength= 0.5*Math.PI ;
 
 
-    const materialD = new THREE.MeshLambertMaterial({ color:0xfEDF4F5});
+    const materialD = new THREE.MeshLambertMaterial({  map: texturIgDoor });
     const mesh6 = new THREE.Mesh(Cylinder, materialD);
     mesh6.position.set(-12, 0,8);
     scene.add(mesh6);
@@ -183,11 +193,27 @@ function init(day,night){
 
     document.body.appendChild(renderer.domElement)
 
-    
+    window.addEventListener( 'resize', onWindowResize );
 
 }
 
 init(1,0);
+animate();
+
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
+
+function animate() {
+
+    requestAnimationFrame( animate );
+    renderer.render( scene, camera );
+}
 
 document.getElementById("sldrSpeed").onchange = function(event) {
     rSpeed = parseFloat(event.target.value);
